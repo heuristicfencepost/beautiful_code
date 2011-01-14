@@ -49,4 +49,5 @@ int main()
   printf("Match with end qualifier [1 expected]: %d\n",match("bar$","foobar"));
   printf("Match with end qualifier in body [0 expected]: %d\n",match("foo$","foobar"));
   printf("Match with optional qualifier [1 expected]: %d\n",match("fo*b","foobar"));
+  printf("Match with optional qualifier 2 [1 expected]: %d\n",match("fooa*b","foobar"));
 }
