@@ -1,7 +1,7 @@
-#include<stdio.h>
-
 /* Rob Pike's simple regex implementation from "The Practice of Programming".  Also
    referenced by Brian Kerningham in the "Beautiful Code" book. */
+
+#include<stdio.h>
 
 /* match: search for regexp anywhere in text */
 int match(char *regexp, char *text)
@@ -41,7 +41,12 @@ int matchstar(int c, char *regexp, char *text)
 
 int main()
 {
-  printf("^abc matching abc: %d\n",match("^abc","abc"));
-  printf("^abc matching ab: %d\n",match("^abc","ab"));
-  printf("abc matching fooabc: %d\n",match("abc","fooabc"));
+  printf("Basic match, beginning of string [1 expected]: %d\n",match("foo","foobar"));
+  printf("Basic match, middle of string [1 expected]: %d\n",match("oba","foobar"));
+  printf("Basic match, no match [0 expected]: %d\n",match("obo","foobar"));
+  printf("Match with start qualifier [1 expected]: %d\n",match("^fo","foobar"));
+  printf("Match with start qualifier in body [0 expected]: %d\n",match("^bar","foobar"));
+  printf("Match with end qualifier [1 expected]: %d\n",match("bar$","foobar"));
+  printf("Match with end qualifier in body [0 expected]: %d\n",match("foo$","foobar"));
+  printf("Match with optional qualifier [1 expected]: %d\n",match("fo*b","foobar"));
 }
