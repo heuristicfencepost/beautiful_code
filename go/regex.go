@@ -38,11 +38,11 @@ func matchhere(regexp string, text string) (rv int) {
 
 func matchstar(c byte, regexp string, text string) (rv int) {
 
-	// Check for zero-length case
-	if matchhere(regexp,text) == 1 { return 1 }
-
 	// Otherwise we need a matchhere() call for every substring of text ending with the last character of text which
 	// has an initial character of c or the literal '.'
+	//
+	// Note that the special case of a leading match of zero instances is handled by the presence of 0 in the set
+	// of keys returned by range.  This special case was the rationale for the do loop in the original model.
 	for key,_ := range text {
 
 		// Sequence matters here; to simulate the do syntax we do the break test after the matchhere() call.
@@ -65,4 +65,5 @@ func main() {
   fmt.Printf("Match with end qualifier in body [0 expected]: %d\n",match("foo$","foobar"));
   fmt.Printf("Match with optional qualifier [1 expected]: %d\n",match("fo*b","foobar"));
   fmt.Printf("Match with optional qualifier 2 [1 expected]: %d\n",match("fooa*b","foobar"));
+  fmt.Printf("Match with optional qualifier 3 [1 expected]: %d\n",match("a*foo","foobar"));
 }
